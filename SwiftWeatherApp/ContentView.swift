@@ -7,82 +7,123 @@
 
 import SwiftUI
 import CoreData
+import Foundation
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+    
+    @State private var isNight = false
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+        ZStack{
+            BackgroundView(isNight: isNight)
+            VStack {
+                CityTextView(cityName: "Kolkata, India")
+                MainWeather(weatherImage: isNight ? "cloud.moon.fill": "cloud.sun.fill",
+                            temperature: 76)
+                .padding(.bottom, 50)
+                HStack{
+                    DayWeatherView(dayOfWeek: "Mon",
+                                   image: isNight ? "cloud.moon.fill": "cloud.bolt.fill",
+                                   temperature: 76)
+                    DayWeatherView(dayOfWeek: "Tue",
+                                   image: isNight ? "moon.stars.fill": "sun.max.fill",
+                                   temperature: 79)
+                    DayWeatherView(dayOfWeek: "Wed",
+                                   image: isNight ? "cloud.moon.bolt.fill" : "cloud.bolt.rain.fill",
+                                   temperature: 82)
+                    DayWeatherView(dayOfWeek: "Thu",
+                                   image: isNight ? "cloud.moon.rain.fill" : "cloud.sun.rain.fill",
+                                   temperature: 78)
+                    DayWeatherView(dayOfWeek: "Fri",
+                                   image: isNight ? "cloud.moon.bolt.fill" : "cloud.sun.bolt.fill",
+                                   temperature: 82)
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                .padding(.bottom, 50)
+                
+                Button {
+                    isNight.toggle()
+                } label: {
+                    WeatherButton(title: "Change Day Time", textColor: Color.white, backgroundColor: Color("buttonTintColor"))
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                
+                .padding(.bottom, 50)
             }
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+
+
+struct DayWeatherView : View{
+    var dayOfWeek: String
+    var image: String
+    var temperature: Int
+    var body: some View{
+        VStack (spacing: 15) {
+            Text(dayOfWeek)
+                .font(.system(size: 25, weight: .semibold, design: .default))
+                .foregroundColor(.white)
+            Image(systemName: image)
+                .symbolRenderingMode(.multicolor)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 70, height: 70)
+            
+            Text("\(temperature)°")
+                .font(.system(size: 25, weight: .semibold, design: .default))
+                .foregroundColor(.white)
+        }
+    }
+}
+
+struct BackgroundView: View {
+    
+    var isNight: Bool
+    
+    var body: some View{
+        LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue,
+                                                   isNight ? Color("darkGray") : .cyan,
+                                                   isNight ? .gray : Color("lightBlue")]),
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing)
+        .ignoresSafeArea()
+    }
+}
+
+struct CityTextView: View {
+    var cityName: String
+    var body: some View{
+        Text(cityName)
+            .font(.system(size: 35, weight: .bold, design: .default))
+            .foregroundColor(.white)
+            .padding(.top, 25)
+    }
+}
+
+
+struct MainWeather : View {
+    var weatherImage: String
+    var temperature: Int
+    var body: some View{
+        VStack (spacing: 8){
+            Image(systemName: weatherImage)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 150, height: 150)
+            
+            Text("\(temperature)°")
+                .font(.system(size: 45, weight: .semibold, design: .default))
+                .foregroundColor(.white)
+        }
+    }
+}
+
+

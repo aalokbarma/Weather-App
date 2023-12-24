@@ -16,6 +16,7 @@
 		0D641DE02ABC416400979D09 /* SwiftWeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D641DDF2ABC416400979D09 /* SwiftWeatherAppTests.swift */; };
 		0D641DEA2ABC416400979D09 /* SwiftWeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D641DE92ABC416400979D09 /* SwiftWeatherAppUITests.swift */; };
 		0D641DEC2ABC416400979D09 /* SwiftWeatherAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D641DEB2ABC416400979D09 /* SwiftWeatherAppUITestsLaunchTests.swift */; };
+		0D641DF92ABCC7A000979D09 /* WeatherButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D641DF82ABCC7A000979D09 /* WeatherButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		0D641DE52ABC416400979D09 /* SwiftWeatherAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftWeatherAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D641DE92ABC416400979D09 /* SwiftWeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWeatherAppUITests.swift; sourceTree = "<group>"; };
 		0D641DEB2ABC416400979D09 /* SwiftWeatherAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftWeatherAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0D641DF82ABCC7A000979D09 /* WeatherButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				0D641DC92ABC416100979D09 /* SwiftWeatherAppApp.swift */,
 				0D641DCB2ABC416100979D09 /* ContentView.swift */,
+				0D641DF82ABCC7A000979D09 /* WeatherButton.swift */,
 				0D641DCD2ABC416400979D09 /* Assets.xcassets */,
 				0D641DD22ABC416400979D09 /* Persistence.swift */,
 				0D641DD42ABC416400979D09 /* SwiftWeatherApp.xcdatamodeld */,
@@ -267,6 +270,7 @@
 				0D641DCC2ABC416100979D09 /* ContentView.swift in Sources */,
 				0D641DD62ABC416400979D09 /* SwiftWeatherApp.xcdatamodeld in Sources */,
 				0D641DCA2ABC416100979D09 /* SwiftWeatherAppApp.swift in Sources */,
+				0D641DF92ABCC7A000979D09 /* WeatherButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,11 +432,13 @@
 				DEVELOPMENT_TEAM = BJ3KU2BJXU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Weather App";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,11 +463,13 @@
 				DEVELOPMENT_TEAM = BJ3KU2BJXU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Weather App";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
